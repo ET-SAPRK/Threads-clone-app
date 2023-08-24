@@ -31,7 +31,7 @@ console.log("server is running on port 3000");
 const User = require("./models/user");
 const Post = require("./models/post");
 
-app.post("//register", async(req,res) => {
+app.post("/register", async(req,res) => {
   try {
     const { name, email, password } = req.body;
 

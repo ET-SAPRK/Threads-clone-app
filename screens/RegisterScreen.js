@@ -23,6 +23,31 @@ const RegisterScreen = () => {
   const navigation = useNavigation();
   
   const handleRegister = () => {
+    const user = {
+      name: name,
+      email: email,
+      password: password,
+    };
+    
+    axios
+      .post("http://192.168.43.207:3000/register", user)
+      .then((response) => {
+        console.log(response);
+        Alert.alert(
+          "Registration successful",
+          "you have been registered successfully"
+        );
+        setName("");
+        setEmail("");
+        setPassword("");
+      })
+      .catch((error) => {
+        Alert.alert(
+          "Registration failed",
+          "An error occurred during registration"
+        );
+        console.log("error", error);
+      });
 
   }
   return (
