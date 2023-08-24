@@ -65,7 +65,7 @@ const User = ({ item }) => {
         <Text style={{ fontSize: 15, fontWeight: "500", flex: 1 }}>
           {item?.name}
         </Text>
-        {requestSent || item?.followers?.includes(userId) ? (
+        {requestSent ? (
           <Pressable
             onPress={() => handleUnfollow(item?._id)}
             style={{
