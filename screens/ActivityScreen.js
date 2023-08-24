@@ -16,8 +16,33 @@ const ActivityScreen = () => {
   const [selectedButton, setSelctedButton] = useState("people");
   const [content, setContent] = useState("People Content");
   const [users, setUsers] = useState([]);
+  const { userId, setUserId } = useContext(UserType);
 
-  const handleButtonClick = () => {};
+  const handleButtonClick = (buttonName) => {
+    setSelctedButton(buttonName)
+  };
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const token = await AsyncStorage.getItem("authToken");
+      const decodedToken = jwt_decode(token);
+      const userId = decodedToken.userId;
+      setUserId(userId);
+
+      axios
+        .get(`http://192.168.43.207:3000/user/${userId}`)
+        .then((response) => {
+          setUsers(response.data);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    };
+
+    fetchUsers();
+  }, []);
+  console.log(users)
+
   return (
     <ScrollView style={{ marginTop: 50 }}>
       <View style={{ padding: 10 }}>
@@ -110,6 +135,15 @@ const ActivityScreen = () => {
               Requests
             </Text>
           </TouchableOpacity>
+        </View>
+        <View>
+          {selectedButton === "people" && (
+            <View style={{marginTop:20}}>
+              {users?.map((item, index) => (
+                <User key={index} item={item} />
+              ))}
+            </View>
+          )}
         </View>
       </View>
     </ScrollView>
