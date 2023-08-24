@@ -21,6 +21,22 @@ const LoginScreen = () => {
   const [password, setPassword] = useState("");
   const navigation = useNavigation();
 
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        const token = await AsyncStorage.getItem("authToken");
+        if (token) {
+          setTimeout(() => {
+            navigation.replace("Main");
+          }, 400);
+        }
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
+    checkLoginStatus();
+  }, []);
+
   const handleLogin = () => {
     const user = {
       email: email,
