@@ -26,19 +26,22 @@ const User = ({ item }) => {
   };
   const handleUnfollow = async (targetId) => {
     try {
-      const response = await fetch("http://192.168.43.207:3000/users/unfollow", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          loggedInUserId: userId,
-          targetUserId: targetId,
-        }),
-      });
+      const response = await fetch(
+        "http://192.168.43.207:3000/users/unfollow",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            loggedInUserId: userId,
+            targetUserId: targetId,
+          }),
+        }
+      );
 
-      if(response.ok){
-          setRequestSent(false);
+      if (response.ok) {
+        setRequestSent(false);
       }
     } catch (error) {
       console.log("Error", error);
