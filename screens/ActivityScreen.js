@@ -19,7 +19,7 @@ const ActivityScreen = () => {
   const { userId, setUserId } = useContext(UserType);
 
   const handleButtonClick = (buttonName) => {
-    setSelctedButton(buttonName)
+    setSelctedButton(buttonName);
   };
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const ActivityScreen = () => {
 
     fetchUsers();
   }, []);
-  console.log(users)
+  console.log(users);
 
   return (
     <ScrollView style={{ marginTop: 50 }}>
@@ -138,7 +138,7 @@ const ActivityScreen = () => {
         </View>
         <View>
           {selectedButton === "people" && (
-            <View style={{marginTop:20}}>
+            <View style={{ marginTop: 20 }}>
               {users?.map((item, index) => (
                 <User key={index} item={item} />
               ))}
