@@ -236,3 +236,17 @@ app.put("/posts/:postId/:userId/unlike", async (req, res) => {
       .json({ message: "An error occurred while unliking the post" });
   }
 });
+
+app.get("/get-posts", async (req, res) => {
+  try {
+    const posts = await Post.find()
+      .populate("user", "name")
+      .sort({ createdAt: -1 });
+
+    res.status(200).json(posts);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "An error occurred while getting the posts" });
+  }
+});
