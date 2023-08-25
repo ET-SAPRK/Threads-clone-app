@@ -16,7 +16,21 @@ const ThreadsScreen = () => {
   const [content, setContent] = useState("");
 
   const handlePostSubmit = () => {
+    const postData = {
+      userId,
+    };
+    if (content) {
+      postData.content = content;
+    }
 
+    axios
+      .post("http://192.168.43.207:3000/create-post", postData)
+      .then((response) => {
+        setContent("");
+      })
+      .catch((error) => {
+        console.log("error creating post", error);
+      });
   }
   return (
     <SafeAreaView style={{ padding: 10, marginTop: 20 }}>
